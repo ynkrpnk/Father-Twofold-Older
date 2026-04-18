@@ -1,5 +1,14 @@
 "use strict";
 
+// Documentation JSDoc
+/**
+ * 
+ * @param {number} fatherAge  Поточний вік батька
+ * @param {number} sonAge Поточний вік сина
+ * @returns {number} Кількість років
+ */
+
+
 const calculateAge = (fatherAge, sonAge) => {
   if (fatherAge < 0 || sonAge < 0 || fatherAge - sonAge < 15) {
     return 0;
