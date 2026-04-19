@@ -8,48 +8,53 @@
  * @returns {number} Кількість років
  */
 
-
 const calculateAge = (fatherAge, sonAge) => {
   if (fatherAge < 0 || sonAge < 0 || fatherAge - sonAge < 15) {
-    return 0;
+    return -1;
   }
 
   const ageDiff = fatherAge - sonAge;
   const years = sonAge - ageDiff;
   const absYears = Math.abs(years);
 
-  let strYears;
-
-  if (absYears >= 10 && absYears <= 20) {
-    strYears = "років";
-  } else {
-    switch (String(absYears).slice(-1)) {
-      case "1":
-        strYears = "рік";
-        break;
-      case "2":
-      case "3":
-      case "4":
-        strYears = "роки";
-        break;
-      default:
-        strYears = "років";
-    }
-  }
-
-  if (years === 0) {
-    console.log("Батько вже вдвічі старший за сина.");
-  } else if (years > 0) {
-    console.log(
-      `Батько був удвічі старший за сина ${absYears} ${strYears} тому`,
-    );
-  } else {
-    console.log(
-      `Батько буде удвічі старший за сина через ${absYears} ${strYears}`,
-    );
-  }
-
-  return absYears;
+  return years;
 };
 
-console.log(calculateAge(40, 20));
+const getYearWord = (years) => {
+  const abs = Math.abs(years);
+
+  if (abs >= 10 && abs <= 20) return "років";
+
+  switch (String(abs).slice(-1)) {
+    case "1":
+      return "рік";
+    case "2":
+    case "3":
+    case "4":
+      return "роки";
+    default:
+      return "років";
+  }
+};
+
+const printResult = (years) => {
+  if (years === -1) {
+    console.log("Некоректні дані");
+    return;
+  }
+
+  const absYears = Math.abs(years);
+  const word = getYearWord(years);
+
+  if (years === 0) {
+    console.log("Батько зараз удвічі старший за сина.");
+  } else if (years > 0) {
+    console.log(`Батько був удвічі старший ${absYears} ${word} тому`);
+  } else {
+    console.log(`Батько буде удвічі старший через ${absYears} ${word}`);
+  }
+};
+
+const years = calculateAge(20, 5);
+printResult(years);
+//console.log(years);
