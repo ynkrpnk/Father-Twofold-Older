@@ -8,19 +8,13 @@
  * @returns {number} Кількість років
  */
 
-const calculateAge = (fatherAge, sonAge) => {
-  if (fatherAge < 0 || sonAge < 0 || fatherAge - sonAge < 15) {
-    return -1;
-  }
+function calculateAge(fatherAge, sonAge) {
+  if (sonAge < 0 || fatherAge - sonAge < 15) return NaN;
 
-  const ageDiff = fatherAge - sonAge;
-  const years = sonAge - ageDiff;
-  const absYears = Math.abs(years);
+  return fatherAge - 2 * sonAge;
+}
 
-  return years;
-};
-
-const getYearWord = (years) => {
+function getYearWord(years) {
   const abs = Math.abs(years);
 
   if (abs >= 10 && abs <= 20) return "років";
@@ -35,10 +29,10 @@ const getYearWord = (years) => {
     default:
       return "років";
   }
-};
+}
 
-const printResult = (years) => {
-  if (years === -1) {
+function printResult(years) {
+  if (Number.isNaN(years)) {
     console.log("Некоректні дані");
     return;
   }
@@ -53,8 +47,7 @@ const printResult = (years) => {
   } else {
     console.log(`Батько буде удвічі старший через ${absYears} ${word}`);
   }
-};
+}
 
-const years = calculateAge(20, 5);
-printResult(years);
-//console.log(years);
+const result = calculateAge(31, 11);
+printResult(result);
